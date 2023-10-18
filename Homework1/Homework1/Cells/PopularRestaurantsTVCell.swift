@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Hero
 
 class PopularRestaurantsTVCell: UITableViewCell {
     
@@ -15,24 +16,27 @@ class PopularRestaurantsTVCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.backgroundColor = UIColor(named: "PlaceholderFont")
+        imageView.hero.id = "heroImageView"
         return imageView
     }()
     
     let restaurantNameLabel : UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor(named: "PrimaryFont")
         label.textAlignment = .left
         label.font = .init(name: "Metropolis-Bold", size: 20)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.hero.id = "primaryLabel"
         return label
     }()
     
     let restaurantTypeLabel : UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor(named: "SecondaryFont")
         label.textAlignment = .left
         label.font = .init(name: "Metropolis-Medium", size: 18)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.hero.id = "secondaryLabel"
         return label
     }()
     
@@ -42,24 +46,27 @@ class PopularRestaurantsTVCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor(named:"AppOrange")
+        imageView.hero.id = "starImage"
         return imageView
     }()
     
     let ratingLabel : UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor(named:"AppOrange")
         label.textAlignment = .left
         label.font = .init(name: "Metropolis-Bold", size: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.hero.id = "ratingLabel"
         return label
     }()
     
     let ratingCountLabel : UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor(named: "SecondaryFont")
         label.textAlignment = .left
         label.font = .init(name: "Metropolis-Regular", size: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.hero.id = "ratingCountLabel"
         return label
     }()
     

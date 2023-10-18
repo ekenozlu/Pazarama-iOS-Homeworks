@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Hero
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
@@ -27,6 +28,12 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         let nav3 = UINavigationController(rootViewController: vc3)
         let nav4 = UINavigationController(rootViewController: vc4)
         let nav5 = UINavigationController(rootViewController: vc5)
+        
+        nav1.isHeroEnabled = true
+        nav2.isHeroEnabled = true
+        nav3.isHeroEnabled = true
+        nav4.isHeroEnabled = true
+        nav5.isHeroEnabled = true
         
         configureNavController(nav1)
         configureNavController(nav2)
@@ -84,10 +91,4 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         self.selectedIndex = 1
     }
     
-}
-
-
-
-#Preview {
-    TabBarViewController()
 }

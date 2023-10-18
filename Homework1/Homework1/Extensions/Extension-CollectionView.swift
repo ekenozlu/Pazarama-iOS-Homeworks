@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Hero
 
 extension HomeVC : UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -29,6 +30,7 @@ extension HomeVC : UICollectionViewDelegate, UICollectionViewDataSource {
             return cell
         case popularCV :
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "popularCell", for: indexPath) as! MostPopularCVCell
+            cell.isHeroEnabled = true
             let restaurant = restaurantArrayForCV[indexPath.row]
             cell.restaurantNameLabel.text = restaurant.restaurantName
             cell.restaurantImageView.image = UIImage(named: restaurant.restaurantImageName)
@@ -37,6 +39,19 @@ extension HomeVC : UICollectionViewDelegate, UICollectionViewDataSource {
             return cell
         default :
             return UICollectionViewCell()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch collectionView {
+        case kitchensCV :
+            break
+        case popularCV :
+            let detailVC = DetailVC()
+            detailVC.selectedRestaurant = restaurantArrayForCV[indexPath.row]
+            navigationController?.pushViewController(detailVC, animated: true)
+        default :
+            break
         }
     }
 }

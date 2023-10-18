@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Hero
 
 class RecentItemsTVCell: UITableViewCell {
     
@@ -16,6 +17,7 @@ class RecentItemsTVCell: UITableViewCell {
         imageView.clipsToBounds = true
         imageView.backgroundColor = UIColor(named: "PlaceholderFont")
         imageView.layer.cornerRadius = 8
+        imageView.hero.id = "heroImageView"
         return imageView
     }()
     
@@ -25,6 +27,7 @@ class RecentItemsTVCell: UITableViewCell {
         label.textAlignment = .left
         label.font = .init(name: "Metropolis-Bold", size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.hero.id = "primaryLabel"
         return label
     }()
     
@@ -34,6 +37,7 @@ class RecentItemsTVCell: UITableViewCell {
         label.textAlignment = .left
         label.font = .init(name: "Metropolis-Medium", size: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.hero.id = "secondaryLabel"
         return label
     }()
     
@@ -43,6 +47,7 @@ class RecentItemsTVCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor(named:"AppOrange")
+        imageView.hero.id = "starImage"
         return imageView
     }()
     
@@ -52,6 +57,7 @@ class RecentItemsTVCell: UITableViewCell {
         label.textAlignment = .left
         label.font = .init(name: "Metropolis-Bold", size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.hero.id = "ratingLabel"
         return label
     }()
     
@@ -61,6 +67,7 @@ class RecentItemsTVCell: UITableViewCell {
         label.textAlignment = .left
         label.font = .init(name: "Metropolis-Regular", size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.hero.id = "ratingCountLabel"
         return label
     }()
     

@@ -196,10 +196,12 @@ class HomeVC: UIViewController {
         popularLabel.textColor = UIColor(named: "PrimaryFont")
         popularLabel.font = .init(name: "Metropolis-ExtraBold", size: 22)
         popularLabel.textAlignment = .left
+        popularLabel.hero.id = "titleLabel"
         popularTVView.addSubview(popularLabel)
         popularLabel.leftAnchor.constraint(equalTo: popularTVView.leftAnchor, constant: 10).isActive = true
         popularLabel.topAnchor.constraint(equalTo: popularTVView.topAnchor, constant: 10).isActive = true
         popularLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
         
         let viewAllLabel = UILabel()
         viewAllLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -234,6 +236,7 @@ class HomeVC: UIViewController {
         popularLabel2.textColor = UIColor(named: "PrimaryFont")
         popularLabel2.font = .init(name: "Metropolis-ExtraBold", size: 22)
         popularLabel2.textAlignment = .left
+        popularLabel2.hero.id = "titleLabel"
         popularCVView.addSubview(popularLabel2)
         popularLabel2.leftAnchor.constraint(equalTo: popularCVView.leftAnchor, constant: 10).isActive = true
         popularLabel2.topAnchor.constraint(equalTo: popularCVView.topAnchor, constant: 10).isActive = true
@@ -277,6 +280,7 @@ class HomeVC: UIViewController {
         popularLabel3.textColor = UIColor(named: "PrimaryFont")
         popularLabel3.font = .init(name: "Metropolis-ExtraBold", size: 22)
         popularLabel3.textAlignment = .left
+        popularLabel3.hero.id = "titleLabel"
         recentItemsView.addSubview(popularLabel3)
         popularLabel3.leftAnchor.constraint(equalTo: recentItemsView.leftAnchor, constant: 10).isActive = true
         popularLabel3.topAnchor.constraint(equalTo: recentItemsView.topAnchor, constant: 10).isActive = true
@@ -340,5 +344,6 @@ class HomeVC: UIViewController {
     func updateDeliveryButtonTitle(_ actionTitle : String) {
         deliveryButton.setTitle("\(actionTitle) ▼", for: .normal)
     }
+    
 }
 
