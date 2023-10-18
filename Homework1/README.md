@@ -3,16 +3,20 @@ In this homework we focused on a mock food delivery application feed screen. It 
 
 I used [this](https://www.behance.net/gallery/108639283/Meal-Monkey-Food-delivery-iOS-mobile-application) design as source
 ## App Contains
-1. Custom NavigationBar
-2. Custom Shaped TabBar with Custom Button
-3. Functional Pull-down Button
-4. Correct fonts according to design
-5. Multiple CollectionView and TableView in one ViewController
-6. StackView, ScrollView with all other elements built programmitacally
-
-## I am currently working on (Until deadline):
-1. Some functionality on app for better experience. (didSelect function for items, Context Menu for items)
+1. Semi-functional build
+2. Custom NavigationBar
+3. Custom Shaped TabBar with Custom Button
+4. Functional Pull-down Button
+5. Correct fonts according to design
+6. Transition animations on cells to detail ViewController (Check Video Below)
+7. Multiple CollectionView and TableView in one ViewController
+8. StackView, ScrollView with all other elements built programmitacally
 
 | Screen | Screen | Screen |
 | ------ | ------ | ------ |
 | ![Screen](https://github.com/ekenozlu/Pazarama-iOS-Homeworks/blob/main/Homework1/GitImages/screen1.png "Screen") | ![Screen](https://github.com/ekenozlu/Pazarama-iOS-Homeworks/blob/main/Homework1/GitImages/screen2.png "Screen") | ![Screen](https://github.com/ekenozlu/Pazarama-iOS-Homeworks/blob/main/Homework1/GitImages/screen3.png "Screen") |
+
+
+## Screen Record:
+https://github.com/ekenozlu/Pazarama-iOS-Homeworks/assets/66272522/65d4ea56-e9a1-4952-a83b-72e8eea28ab9
+
