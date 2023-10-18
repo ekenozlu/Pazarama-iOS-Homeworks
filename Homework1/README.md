@@ -6,8 +6,9 @@ I used [this](https://www.behance.net/gallery/108639283/Meal-Monkey-Food-deliver
 1. Custom NavigationBar
 2. Custom Shaped TabBar with Custom Button
 3. Functional Pull-down Button
-4. Multiple CollectionView and TableView in one ViewController
-5. StackView, ScrollView with all other elements built programmitacally
+4. Correct fonts according to design
+5. Multiple CollectionView and TableView in one ViewController
+6. StackView, ScrollView with all other elements built programmitacally
 
 ## I am currently working on (Until deadline):
 1. Some functionality on app for better experience. (didSelect function for items, Context Menu for items)
