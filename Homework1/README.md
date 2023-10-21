@@ -15,10 +15,3 @@ I used [this](https://www.behance.net/gallery/108639283/Meal-Monkey-Food-deliver
 | Screen | Screen | Screen | Screen Record |
 | ------ | ------ | ------ | ------------- |
 | ![Screen](https://github.com/ekenozlu/Pazarama-iOS-Homeworks/blob/main/Homework1/GitImages/screen1.png "Screen") | ![Screen](https://github.com/ekenozlu/Pazarama-iOS-Homeworks/blob/main/Homework1/GitImages/screen2.png "Screen") | ![Screen](https://github.com/ekenozlu/Pazarama-iOS-Homeworks/blob/main/Homework1/GitImages/screen3.png "Screen") | ![Screen Record](https://github.com/ekenozlu/Pazarama-iOS-Homeworks/blob/main/Homework1/GitImages/screenGif.gif "Screen Record") |
-
-
-
-
-## Screen Record:
-https://github.com/ekenozlu/Pazarama-iOS-Homeworks/assets/66272522/65d4ea56-e9a1-4952-a83b-72e8eea28ab9
-
