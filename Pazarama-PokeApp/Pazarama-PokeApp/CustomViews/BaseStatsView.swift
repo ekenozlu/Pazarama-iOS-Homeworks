@@ -11,8 +11,12 @@ class BaseStatsView: UIView {
     // Label 1
     let statName: UILabel = {
         let label = UILabel()
-        label.text = "Label 1"
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Label 1"
+        label.textAlignment = .right
+        label.font = .systemFont(ofSize: 16, weight: .black)
+        label.textColor = .black
+        label.numberOfLines = 1
         return label
     }()
 
@@ -27,9 +31,12 @@ class BaseStatsView: UIView {
     // Label 2
     let statValue: UILabel = {
         let label = UILabel()
-        label.text = "Label 2"
-        label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Label 2"
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.textColor = .darkGray
+        label.numberOfLines = 1
         return label
     }()
 
@@ -40,8 +47,15 @@ class BaseStatsView: UIView {
         return progressBar
     }()
 
-    override init(frame: CGRect) {
+    init(frame: CGRect,label1Text: String, label2Text: String, progress: Float,primColor: UIColor, secColor: UIColor) {
         super.init(frame: frame)
+        statName.text = label1Text
+        statName.textColor = primColor
+        statValue.text = label2Text
+        progressBar.progress = progress
+        progressBar.progressTintColor = primColor
+        progressBar.trackTintColor = secColor
+
         setupViews()
     }
 
@@ -49,16 +63,6 @@ class BaseStatsView: UIView {
         super.init(coder: aDecoder)
         setupViews()
     }
-    
-    init(label1Text: String, label2Text: String, progress: Float) {
-            super.init(frame: .zero)
-            
-            statName.text = label1Text
-            statValue.text = label2Text
-        progressBar.progress = progress
-
-            setupViews()
-        }
 
     func setupViews() {
         addSubview(statName)
@@ -81,11 +85,11 @@ class BaseStatsView: UIView {
             progressBar.leadingAnchor.constraint(equalTo: statValue.trailingAnchor, constant: 8),
             progressBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             progressBar.centerYAnchor.constraint(equalTo: centerYAnchor)
-//            progressBar.widthAnchor.constraint(equalToConstant: 200)
         ])
     }
 }
 
 #Preview() {
-    BaseStatsView(label1Text: "SDEF", label2Text: "45", progress: 45 / 100)
+    BaseStatsView(frame: .zero, label1Text: "SDEF", label2Text: "45", progress: 45 / 100,primColor: .red,secColor: .green)
 }
+

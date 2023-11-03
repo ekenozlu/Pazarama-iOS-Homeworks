@@ -9,33 +9,21 @@ import UIKit
 
 class AboutView: UIView {
     
-    private let imageView: UIImageView
-    private let infoLabel: UILabel
-    private let infoLabel2: UILabel
-    private let infoLabel3: UILabel
+    private let isWithImage : Bool
+    private let imageView = UIImageView()
+    private let infoLabel = UILabel()
+    private let infoLabel2 = UILabel()
+    private let infoLabel3 = UILabel()
     
-    init(image: UIImage? = nil, info1: String, info2: String? = nil, info3: String) {
-        self.imageView = UIImageView()
-        self.infoLabel = UILabel()
-        self.infoLabel3 = UILabel()
-        self.infoLabel2 = UILabel()
-        
+    init(isWithImage: Bool, image: UIImage? = nil, info1: String, info2: String? = nil, info3: String) {
+        self.isWithImage = isWithImage
         super.init(frame: .zero)
-        
-        if info2 == nil {
-            infoLabel2.isHidden = true
-        }
+        imageView.image = image
+        infoLabel.text = info1
+        infoLabel2.text = info2
+        infoLabel3.text = info3
         
         setupView()
-        
-        if let image = image {
-            setImage(image)
-        }
-        setInfo1(info1)
-        if let info2 = info2 {
-            setInfo2(info2)
-        }
-        setInfo3(info3)
     }
     
     required init?(coder: NSCoder) {
@@ -43,70 +31,70 @@ class AboutView: UIView {
     }
     
     private func setupView() {
-        addSubview(imageView)
-        addSubview(infoLabel)
-        addSubview(infoLabel3)
-        addSubview(infoLabel2)
-        
         backgroundColor = .white
         
-        imageView.contentMode = .scaleAspectFit
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.spacing = 8
+        addSubview(stackView)
+        stackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        stackView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        infoLabel.font = UIFont(name: "Poppins-Regular", size: 10)
-        infoLabel.textColor = .black
-        infoLabel.textAlignment = .center
+        imageView.contentMode = .scaleAspectFit
+        
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
-        infoLabel2.font = UIFont(name: "Poppins-Regular", size: 10)
+        infoLabel.font = .systemFont(ofSize: 16, weight: .regular)
+        infoLabel.textColor = .black
+        
+        
+        infoLabel2.translatesAutoresizingMaskIntoConstraints = false
+        infoLabel2.font = .systemFont(ofSize: 16, weight: .regular)
         infoLabel2.textColor = .black
         infoLabel2.textAlignment = .center
-        infoLabel2.translatesAutoresizingMaskIntoConstraints = false
-        infoLabel3.font = UIFont(name: "Poppins-Regular", size: 8)
+        
+        infoLabel3.translatesAutoresizingMaskIntoConstraints = false
+        infoLabel3.font = .systemFont(ofSize: 14, weight: .regular)
         infoLabel3.textColor = .gray
         infoLabel3.textAlignment = .center
-        infoLabel3.translatesAutoresizingMaskIntoConstraints = false
-
-        let viewWidth: CGFloat = 100
-        let viewHeight: CGFloat = 80
-
-        NSLayoutConstraint.activate([
-            widthAnchor.constraint(equalToConstant: viewWidth),
-            heightAnchor.constraint(equalToConstant: viewHeight),
-
-            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 10),
-
-            infoLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
-            infoLabel.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
-            infoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-
-            infoLabel2.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 5),
-            infoLabel2.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
-            infoLabel2.trailingAnchor.constraint(equalTo: infoLabel.trailingAnchor),
-
-            infoLabel3.topAnchor.constraint(equalTo: infoLabel2.bottomAnchor, constant: 5),
-            infoLabel3.leadingAnchor.constraint(equalTo: infoLabel2.leadingAnchor),
-            infoLabel3.trailingAnchor.constraint(equalTo: infoLabel2.trailingAnchor),
+        addSubview(infoLabel3)
+        
+        if isWithImage {
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
             
-            infoLabel3.bottomAnchor.constraint(equalTo: bottomAnchor),
-        ])
-    }
-    
-    func setImage(_ image: UIImage) {
-        imageView.image = image
-    }
-    
-    func setInfo1(_ info: String) {
-        infoLabel.text = info
-    }
-    
-    func setInfo2(_ info: String) {
-        infoLabel2.text = info
-    }
-    
-    func setInfo3(_ info: String) {
-        infoLabel3.text = info
+            stackView.addArrangedSubview(imageView)
+            imageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            
+            stackView.addArrangedSubview(infoLabel)
+            infoLabel.textAlignment = .right
+            
+            infoLabel3.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
+            infoLabel3.trailingAnchor.constraint(equalTo: infoLabel.trailingAnchor).isActive = true
+            infoLabel3.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        } else {
+            stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            
+            stackView.addArrangedSubview(infoLabel)
+            infoLabel.textAlignment = .center
+            
+            addSubview(infoLabel2)
+            infoLabel2.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+            infoLabel2.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
+            infoLabel2.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
+            
+            infoLabel3.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
+            infoLabel3.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
+            infoLabel3.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        }
+        
+        widthAnchor.constraint(equalToConstant: 100).isActive = true
+        heightAnchor.constraint(equalToConstant: 85).isActive = true
     }
 }
 #Preview() {
-    AboutView(image: UIImage(named: "weight")!, info1: "6.5 kg", info2: nil, info3: "weight")
+    //AboutView(isWithImage: true, image: UIImage(named: "weight")!, info1: "6.5 kg", info2: nil, info3: "Weight")
+    AboutView(isWithImage: false, image: nil, info1: "6.5 kg", info2: "nil", info3: "Weight")
 }

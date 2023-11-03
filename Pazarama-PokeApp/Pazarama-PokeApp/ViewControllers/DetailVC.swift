@@ -12,46 +12,6 @@ class DetailVC: UIViewController {
     var primaryColor = UIColor()
     var secondaryColor = UIColor()
     
-    private let aboutText: UILabel = {
-        let label = UILabel()
-        label.text = "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."
-        label.font = UIFont(name: "Poppins-Regular", size: 10)
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let aboutLabel: UILabel = {
-        let label = UILabel()
-        label.text = "About"
-        label.font = UIFont(name: "Poppins-Bold", size: 14)
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let typeCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 46, height: 20)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 120, bottom: 0, right: 120)
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.layer.borderColor = UIColor.black.cgColor
-        return cv
-    }()
-    
-    private let pokeballImage: UIImageView = {
-        let iv = UIImageView()
-        iv.image = .pokeballBig.withRenderingMode(.alwaysTemplate)
-        iv.clipsToBounds = true
-        iv.contentMode = .scaleAspectFill
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        return iv
-    }()
-    
     private let backButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
@@ -62,9 +22,9 @@ class DetailVC: UIViewController {
     
     private let pokemonName: UILabel = {
         let name = UILabel()
-        name.text = "This is a test text."
+        name.text = "Pokemon Name"
         name.font = .systemFont(ofSize: 24, weight: .bold)
-        name.numberOfLines = 0
+        name.numberOfLines = 1
         name.textColor = .white
         name.translatesAutoresizingMaskIntoConstraints = false
         return name
@@ -73,28 +33,28 @@ class DetailVC: UIViewController {
     private let pokemonID: UILabel = {
         let name = UILabel()
         name.text = "#001"
-        name.font = .systemFont(ofSize: 18, weight: .bold)
-        name.numberOfLines = 0
+        name.font = .systemFont(ofSize: 18, weight: .regular)
+        name.numberOfLines = 1
         name.textColor = .white
         name.translatesAutoresizingMaskIntoConstraints = false
         return name
     }()
     
-    private let imageView: UIImageView = {
+    private let pokeballImage: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.image = .charmander
-        iv.clipsToBounds = true
+        iv.image = .pokeballBig.withRenderingMode(.alwaysTemplate)
+        iv.tintColor = .white
+        iv.contentMode = .scaleAspectFill
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
     
-    private let detailView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 10
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private let pokemonImage: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.image = .bulbasaur
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        return iv
     }()
     
     private let nextButton: UIButton = {
@@ -111,6 +71,34 @@ class DetailVC: UIViewController {
         return button
     }()
     
+    private let detailView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let typeStackView: UIStackView = {
+        let sv = UIStackView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.axis = .horizontal
+        sv.alignment = .center
+        sv.backgroundColor = .clear
+        sv.spacing = 8
+        return sv
+    }()
+    
+    private let aboutLabel: UILabel = {
+        let label = UILabel()
+        label.text = "About"
+        label.font = .systemFont(ofSize: 18, weight: .black)
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let aboutStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -122,6 +110,26 @@ class DetailVC: UIViewController {
         return stack
     }()
     
+    private let aboutText: UILabel = {
+        let label = UILabel()
+        label.text = "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.textAlignment = .center
+        label.numberOfLines = 6
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let baseStatsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Base Stats"
+        label.font = .systemFont(ofSize: 18, weight: .black)
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let baseStatsStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -131,27 +139,6 @@ class DetailVC: UIViewController {
         return stack
     }()
     
-    private let baseStatsLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Base Stats"
-        label.font = UIFont(name: "Poppins-Bold", size: 14)
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    var weightView: AboutView!
-    var heightView: AboutView!
-    var movesView: AboutView!
-    
-    var stat1: BaseStatsView!
-    var stat2: BaseStatsView!
-    var stat3: BaseStatsView!
-    var stat4: BaseStatsView!
-    var stat5: BaseStatsView!
-    var stat6: BaseStatsView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         createUI()
@@ -159,98 +146,70 @@ class DetailVC: UIViewController {
     
     private func createUI() {
         view.backgroundColor = .white
-        addViews()
-        createConstraints()
-    }
-    
-    private func addViews() {
-        view.addSubview(pokeballImage)
+        
         view.addSubview(detailView)
-        view.addSubview(pokemonID)
-        view.addSubview(imageView)
-        view.addSubview(pokemonName)
         view.addSubview(backButton)
+        view.addSubview(pokemonName)
+        view.addSubview(pokemonID)
+        view.addSubview(pokeballImage)
+        view.addSubview(pokemonImage)
         view.addSubview(nextButton)
         view.addSubview(previousButton)
-        view.addSubview(typeCollectionView)
-        view.addSubview(aboutLabel)
-        view.addSubview(aboutStack)
-        view.addSubview(aboutText)
-        view.addSubview(baseStatsLabel)
-        view.addSubview(baseStatsStack)
-        
-        primaryColor = (imageView.image?.primaryColor)!
-        secondaryColor = (imageView.image?.secondaryColor)!
         
         
-        declareViews()
+        primaryColor = (pokemonImage.image?.primaryColor)!
+        secondaryColor = (pokemonImage.image?.secondaryColor)!
         
+        addTypes()
+        detailView.addSubview(typeStackView)
+        
+        aboutLabel.textColor = primaryColor
+        detailView.addSubview(aboutLabel)
+        let weightView = AboutView(isWithImage: true, image: UIImage(named: "weight"),
+                                   info1: "6.5 kg", info2: nil, info3: "weight")
+        let heightView = AboutView(isWithImage: true, image: UIImage(named: "straighten"),
+                                   info1: "0.7 m", info2: nil, info3: "Height")
+        let movesView = AboutView(isWithImage: false, image: nil,
+                                  info1: "Move1", info2: "Move2", info3: "Moves")
         aboutStack.addArrangedSubview(weightView)
         aboutStack.addArrangedSubview(heightView)
         aboutStack.addArrangedSubview(movesView)
+        detailView.addSubview(aboutStack)
         
+        detailView.addSubview(aboutText)
+        
+        baseStatsLabel.textColor = primaryColor
+        detailView.addSubview(baseStatsLabel)
+        let stat1 = BaseStatsView(frame: .zero, label1Text: "HP", label2Text: "45", progress: 45 / 225,
+                                  primColor: primaryColor, secColor: secondaryColor)
+        let stat2 = BaseStatsView(frame: .zero, label1Text: "ATK", label2Text: "49", progress: 49 / 225,
+                                  primColor: primaryColor, secColor: secondaryColor)
+        let stat3 = BaseStatsView(frame: .zero, label1Text: "DEF", label2Text: "49", progress: 49 / 225,
+                                  primColor: primaryColor, secColor: secondaryColor)
+        let stat4 = BaseStatsView(frame: .zero, label1Text: "SATK", label2Text: "65", progress: 65 / 225,
+                                  primColor: primaryColor, secColor: secondaryColor)
+        let stat5 = BaseStatsView(frame: .zero, label1Text: "SDEF", label2Text: "65", progress: 65 / 225,
+                                  primColor: primaryColor, secColor: secondaryColor)
+        let stat6 = BaseStatsView(frame: .zero, label1Text: "SPD", label2Text: "45", progress: 45 / 225,
+                                  primColor: primaryColor, secColor: secondaryColor)
         baseStatsStack.addArrangedSubview(stat1)
         baseStatsStack.addArrangedSubview(stat2)
         baseStatsStack.addArrangedSubview(stat3)
         baseStatsStack.addArrangedSubview(stat4)
         baseStatsStack.addArrangedSubview(stat5)
         baseStatsStack.addArrangedSubview(stat6)
+        detailView.addSubview(baseStatsStack)
         
         view.backgroundColor = primaryColor
-        pokeballImage.tintColor = secondaryColor
-        aboutLabel.textColor = primaryColor
-        baseStatsLabel.textColor = primaryColor
-        
-        stat1.statName.textColor = primaryColor
-        stat1.progressBar.progressTintColor = primaryColor
-        stat1.progressBar.trackTintColor = secondaryColor
-        
-        stat2.statName.textColor = primaryColor
-        stat2.progressBar.progressTintColor = primaryColor
-        stat2.progressBar.trackTintColor = secondaryColor
-        
-        stat3.statName.textColor = primaryColor
-        stat3.progressBar.progressTintColor = primaryColor
-        stat3.progressBar.trackTintColor = secondaryColor
-        
-        stat4.statName.textColor = primaryColor
-        stat4.progressBar.progressTintColor = primaryColor
-        stat4.progressBar.trackTintColor = secondaryColor
-        
-        stat5.statName.textColor = primaryColor
-        stat5.progressBar.progressTintColor = primaryColor
-        stat5.progressBar.trackTintColor = secondaryColor
-        
-        stat6.statName.textColor = primaryColor
-        stat6.progressBar.progressTintColor = primaryColor
-        stat6.progressBar.trackTintColor = secondaryColor
-    }
-    
-    private func declareViews() {
-        typeCollectionView.delegate = self
-        typeCollectionView.dataSource = self
-        typeCollectionView.register(TypeCell.self, forCellWithReuseIdentifier: TypeCell.identifier)
-        
-        weightView = AboutView(image: UIImage(named: "weight"), info1: "6.5 kg", info2: nil, info3: "weight")
-        heightView = AboutView(image: UIImage(named: "straighten"), info1: "0.7 m", info2: nil, info3: "Height")
-        movesView = AboutView(image: nil, info1: "Move1", info2: "Move2", info3: "Moves")
-        
-        
-        stat1 = BaseStatsView(label1Text: "HP", label2Text: "45", progress: 45 / 100)
-        stat2 = BaseStatsView(label1Text: "ATK", label2Text: "49", progress: 49 / 100)
-        stat3 = BaseStatsView(label1Text: "DEF", label2Text: "49", progress: 49 / 100)
-        stat4 = BaseStatsView(label1Text: "SATK", label2Text: "65", progress: 65 / 100)
-        stat5 = BaseStatsView(label1Text: "SDEF", label2Text: "65", progress: 65 / 100)
-        stat6 = BaseStatsView(label1Text: "SPD", label2Text: "45", progress: 45 / 100)
+        createConstraints()
     }
     
     private func createConstraints() {
         NSLayoutConstraint.activate([
-            
-            pokeballImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
-            pokeballImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            pokeballImage.widthAnchor.constraint(equalToConstant: view.frame.size.width - 150),
-            pokeballImage.heightAnchor.constraint(equalToConstant: view.frame.size.height * 0.3),
+            pokeballImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            pokeballImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            pokeballImage.widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.55),
+            pokeballImage.heightAnchor.constraint(equalToConstant: view.frame.size.width * 0.55),
             
             backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
             backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -262,52 +221,83 @@ class DetailVC: UIViewController {
             pokemonID.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             pokemonID.centerYAnchor.constraint(equalTo: pokemonName.centerYAnchor),
             
-            imageView.topAnchor.constraint(equalTo: pokemonName.bottomAnchor, constant: 30),
-            imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 76),
-            imageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -76),
-            imageView.heightAnchor.constraint(equalToConstant: 200),
+            pokemonImage.topAnchor.constraint(equalTo: pokemonName.bottomAnchor, constant: 30),
+            pokemonImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 76),
+            pokemonImage.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -76),
+            pokemonImage.heightAnchor.constraint(equalToConstant: 200),
             
-            previousButton.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
-            previousButton.trailingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: -32),
+            previousButton.centerYAnchor.constraint(equalTo: pokemonImage.centerYAnchor),
+            previousButton.trailingAnchor.constraint(equalTo: pokemonImage.leadingAnchor, constant: -32),
             
-            nextButton.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
-            nextButton.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 32),
-            
+            nextButton.centerYAnchor.constraint(equalTo: pokemonImage.centerYAnchor),
+            nextButton.leadingAnchor.constraint(equalTo: pokemonImage.trailingAnchor, constant: 32),
             
             detailView.topAnchor.constraint(equalTo: pokemonName.bottomAnchor, constant: 180),
             detailView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             detailView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            detailView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            detailView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -20),
             
-            typeCollectionView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
-            typeCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            typeCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            typeCollectionView.heightAnchor.constraint(equalToConstant: 30),
+            typeStackView.topAnchor.constraint(equalTo: pokemonImage.bottomAnchor, constant: 10),
+            typeStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            typeStackView.heightAnchor.constraint(equalToConstant: 30),
             
-            aboutLabel.topAnchor.constraint(equalTo: typeCollectionView.bottomAnchor, constant: 10),
+            aboutLabel.topAnchor.constraint(equalTo: typeStackView.bottomAnchor, constant: 16),
             aboutLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             aboutLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            aboutLabel.heightAnchor.constraint(equalToConstant: 18),
             
-            aboutStack.topAnchor.constraint(equalTo: aboutLabel.bottomAnchor, constant: 16),
-            aboutStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            aboutStack.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -10),
+            aboutStack.topAnchor.constraint(equalTo: aboutLabel.bottomAnchor, constant: 10),
+            aboutStack.leadingAnchor.constraint(equalTo: detailView.leadingAnchor),
+            aboutStack.trailingAnchor.constraint(equalTo: detailView.trailingAnchor),
+            aboutStack.heightAnchor.constraint(equalToConstant: 70),
             
             aboutText.topAnchor.constraint(equalTo: aboutStack.bottomAnchor, constant: 16),
-            aboutText.leadingAnchor.constraint(equalTo: aboutStack.leadingAnchor, constant: 2),
-            aboutText.trailingAnchor.constraint(equalTo: aboutStack.trailingAnchor, constant:  -2),
+            aboutText.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 4),
+            aboutText.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant:  -4),
+            aboutText.heightAnchor.constraint(equalToConstant: 120),
             
-            baseStatsLabel.topAnchor.constraint(equalTo: aboutText.bottomAnchor, constant: 12),
-            baseStatsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            baseStatsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            baseStatsStack.heightAnchor.constraint(equalToConstant: 120),
+            baseStatsStack.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 8),
+            baseStatsStack.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -8),
+            baseStatsStack.bottomAnchor.constraint(equalTo: detailView.bottomAnchor, constant:  -10),
             
-            baseStatsStack.topAnchor.constraint(equalTo: baseStatsLabel.bottomAnchor, constant: 12),
-            baseStatsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            baseStatsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            baseStatsStack.bottomAnchor.constraint(equalTo: detailView.bottomAnchor, constant:  -4),
+            baseStatsLabel.bottomAnchor.constraint(equalTo: baseStatsStack.topAnchor, constant: -10),
+            baseStatsLabel.centerXAnchor.constraint(equalTo: detailView.centerXAnchor),
+            baseStatsLabel.heightAnchor.constraint(equalToConstant: 18)
         ])
+    }
+    
+    private func addTypes() {
+        for _ in 0...1 {
+            let typeView = UIView()
+            typeView.translatesAutoresizingMaskIntoConstraints = false
+            typeView.backgroundColor = secondaryColor
+            typeView.layer.cornerRadius = 10
+            typeStackView.addArrangedSubview(typeView)
+            typeView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+            typeView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = "Type"
+            label.textColor = .white
+            label.font = .systemFont(ofSize: 15, weight: .bold)
+            label.textAlignment = .center
+            label.numberOfLines = 1
+            typeView.addSubview(label)
+            label.leadingAnchor.constraint(equalTo: typeView.leadingAnchor, constant: 2).isActive = true
+            label.trailingAnchor.constraint(equalTo: typeView.trailingAnchor, constant: -2).isActive = true
+            label.topAnchor.constraint(equalTo: typeView.topAnchor, constant: 2).isActive = true
+            label.bottomAnchor.constraint(equalTo: typeView.bottomAnchor, constant: -2).isActive = true
+        }
+        
     }
     
     @objc func backTapped() {
         self.dismiss(animated: true)
     }
+}
+
+#Preview{
+    DetailVC()
 }
