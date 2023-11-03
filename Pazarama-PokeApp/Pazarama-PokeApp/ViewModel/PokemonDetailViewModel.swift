@@ -10,6 +10,7 @@ import Foundation
 protocol PokemonDetailViewModelOutPut: AnyObject{
     func getPokemonDetail(_ pokemon: PokemonDetails)
     func getPokemonSpecies(_ flavorTextEntries: Species)
+    //var pokemonImageURL : String { get set }
 }
 
 final class PokemonDetailViewModel {
@@ -24,6 +25,17 @@ final class PokemonDetailViewModel {
     init(pokemonService: PokemonService) {
         self.pokemonService = pokemonService
     }
+    
+    //func fetchPokemonImage(_ name: String){
+    //    pokemonService.fetchPokemonDetail(name: name) { [weak self] result in
+    //        switch result {
+    //        case .success(let fetchedPokemon):
+    //            self?.output?.pokemonImageURL = fetchedPokemon.sprites.frontDefault
+    //        case .failure:
+    //            self?.output?.pokemonImageURL = ""
+    //        }
+    //    }
+    //}
     
     func fetchPokemonDetail(_ name: String) {
         pokemonService.fetchPokemonDetail(name: name) { [weak self] result in

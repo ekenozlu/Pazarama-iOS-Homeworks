@@ -14,7 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow()
-        window?.rootViewController = MainVC()
+        let pokemonService: PokemonService = APIManager()
+        let viewModel = PokemonViewModel(pokemonService: pokemonService)
+        let detailViewModel = PokemonDetailViewModel(pokemonService: pokemonService)
+        window?.rootViewController = MainVC(viewModel: viewModel, detailViewModel: detailViewModel)
         window?.makeKeyAndVisible()
         return true
     }

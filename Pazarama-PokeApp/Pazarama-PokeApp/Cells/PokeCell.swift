@@ -9,15 +9,6 @@ import UIKit
 
 class PokeCell: UICollectionViewCell {
     
-    let pokeNumberLabel : UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .gray
-        label.textAlignment = .right
-        label.font = .systemFont(ofSize: 12, weight: .regular)
-        return label
-    }()
-    
     let pokeImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -54,12 +45,6 @@ class PokeCell: UICollectionViewCell {
         greyView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         greyView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         greyView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
-        addSubview(pokeNumberLabel)
-        pokeNumberLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 4).isActive = true
-        pokeNumberLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -4).isActive = true
-        pokeNumberLabel.topAnchor.constraint(equalTo: topAnchor, constant: 4).isActive = true
-        pokeNumberLabel.heightAnchor.constraint(equalToConstant: 14).isActive = true
         
         addSubview(pokeImageView)
         pokeImageView.topAnchor.constraint(equalTo: topAnchor,constant: 16).isActive = true

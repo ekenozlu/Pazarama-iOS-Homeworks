@@ -6,17 +6,36 @@
 //
 
 import UIKit
+import SDWebImage
 
-class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
+class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOutPut {
     
-    var shownArray = mockArray
+    var pokemonImageURL: String
+    private let viewModel: PokemonViewModel
+    private let detailViewModel: PokemonDetailViewModel
+    
+    init(viewModel: PokemonViewModel, detailViewModel: PokemonDetailViewModel) {
+        self.viewModel = viewModel
+        self.detailViewModel = detailViewModel
+        pokemonImageURL = ""
+        super.init(nibName: nil, bundle: nil)
+        viewModel.output = self
+        detailViewModel.output = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var baseArray : [PokemonResult]!
+    var shownArray : [PokemonResult]!
     
     let dropdownView = SortDropdownView()
-    
     var pokeCV = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.fetchPokemon()
         createUI()
     }
     
@@ -156,38 +175,20 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let searchText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-        //APPLY SEARCH
-        if searchText == "" {
-            shownArray = mockArray
-        } else {
-            shownArray = mockArray.filter({ poke in
-                poke.name.localizedCaseInsensitiveContains(searchText)
-            })
+    func getPokemon(_ pokemon: Pokemon) {
+        baseArray = pokemon.results
+        shownArray = baseArray
+        DispatchQueue.main.async {
+            self.pokeCV.reloadData()
         }
-        
-        pokeCV.reloadData()
-        return true
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return shownArray.count
+    func getPokemonDetail(_ pokemon: PokemonDetails) {
+        //
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pokeCell", for: indexPath) as! PokeCell
-        let pokemon = shownArray[indexPath.row]
-        cell.pokeNumberLabel.text = "#\(String(format: "%03d", pokemon.number))"
-        cell.pokeImageView.image = .bulbasaur
-        cell.pokeNameLabel.text = pokemon.name
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailVC = DetailVC()
-        detailVC.modalPresentationStyle = .fullScreen
-        self.present(detailVC, animated: true)
+    func getPokemonSpecies(_ flavorTextEntries: Species) {
+        //
     }
     
     @objc func sortClicked() {
@@ -199,9 +200,7 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         dropdownView.radioButton2.buttonImage.image = .radioButtonUnchecked
         dropdownView.radioButton3.buttonImage.image = .radioButtonUnchecked
         dropdownView.radioButton4.buttonImage.image = .radioButtonUnchecked
-        shownArray = shownArray.sorted(by: { p1, p2 in
-            p1.number < p2.number
-        })
+        shownArray = baseArray
         pokeCV.reloadData()
     }
     
@@ -210,9 +209,7 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         dropdownView.radioButton2.buttonImage.image = .radioButtonChecked
         dropdownView.radioButton3.buttonImage.image = .radioButtonUnchecked
         dropdownView.radioButton4.buttonImage.image = .radioButtonUnchecked
-        shownArray = shownArray.sorted(by: { p1, p2 in
-            p1.number > p2.number
-        })
+        shownArray = baseArray.reversed()
         pokeCV.reloadData()
     }
     
@@ -238,9 +235,5 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         pokeCV.reloadData()
     }
     
-    
 }
 
-#Preview {
-    MainVC()
-}

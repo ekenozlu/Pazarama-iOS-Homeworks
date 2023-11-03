@@ -18,10 +18,10 @@ extension UIImage {
       let context = CIContext(options: nil)
       context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBA8, colorSpace: nil)
       return UIColor(
-        red: CGFloat(bitmap[0]) * 5 / 255.0,
-        green: CGFloat(bitmap[1]) * 5 / 255.0,
-        blue: CGFloat(bitmap[2]) * 5 / 255.0,
-        alpha: CGFloat(bitmap[3]) * 5 / 255.0
+        red: CGFloat(bitmap[0]) * 3 / 255.0,
+        green: CGFloat(bitmap[1]) * 3 / 255.0,
+        blue: CGFloat(bitmap[2]) * 3 / 255.0,
+        alpha: 1
       )
     }
     return nil
@@ -38,7 +38,7 @@ extension UIImage {
         red: CGFloat(bitmap[0]) * 3 / 255.0,
         green: CGFloat(bitmap[1]) * 3 / 255.0,
         blue: CGFloat(bitmap[2]) * 3 / 255.0,
-        alpha: CGFloat(bitmap[3]) * 3 / 255.0
+        alpha: 0.5
       )
     }
     return nil

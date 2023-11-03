@@ -15,7 +15,6 @@
 		634188F32AF4D86500CA181A /* Pazarama_PokeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634188F22AF4D86500CA181A /* Pazarama_PokeAppUITests.swift */; };
 		634188F52AF4D86500CA181A /* Pazarama_PokeAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634188F42AF4D86500CA181A /* Pazarama_PokeAppUITestsLaunchTests.swift */; };
 		634189032AF4E46300CA181A /* PokeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634189022AF4E46300CA181A /* PokeCell.swift */; };
-		634189072AF4F14600CA181A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634189062AF4F14600CA181A /* Model.swift */; };
 		634189092AF4FB1200CA181A /* SortDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634189082AF4FB1200CA181A /* SortDropdownView.swift */; };
 		6341890B2AF4FB7F00CA181A /* RadioButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6341890A2AF4FB7F00CA181A /* RadioButtonView.swift */; };
 		634189142AF5196300CA181A /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634189122AF5196300CA181A /* UIImageExtension.swift */; };
@@ -31,6 +30,8 @@
 		634189292AF51FF800CA181A /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634189272AF51FF800CA181A /* APIManager.swift */; };
 		6341892D2AF5200500CA181A /* PokemonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6341892B2AF5200500CA181A /* PokemonDetailViewModel.swift */; };
 		6341892E2AF5200500CA181A /* PokemonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6341892C2AF5200500CA181A /* PokemonViewModel.swift */; };
+		634189322AF542CB00CA181A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 634189312AF542CB00CA181A /* SDWebImage */; };
+		634189342AF5443000CA181A /* MainVC-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634189332AF5443000CA181A /* MainVC-Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +64,6 @@
 		634188F22AF4D86500CA181A /* Pazarama_PokeAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pazarama_PokeAppUITests.swift; sourceTree = "<group>"; };
 		634188F42AF4D86500CA181A /* Pazarama_PokeAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pazarama_PokeAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		634189022AF4E46300CA181A /* PokeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeCell.swift; sourceTree = "<group>"; };
-		634189062AF4F14600CA181A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		634189082AF4FB1200CA181A /* SortDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDropdownView.swift; sourceTree = "<group>"; };
 		6341890A2AF4FB7F00CA181A /* RadioButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonView.swift; sourceTree = "<group>"; };
 		634189122AF5196300CA181A /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
@@ -79,6 +79,7 @@
 		634189272AF51FF800CA181A /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		6341892B2AF5200500CA181A /* PokemonDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonDetailViewModel.swift; sourceTree = "<group>"; };
 		6341892C2AF5200500CA181A /* PokemonViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonViewModel.swift; sourceTree = "<group>"; };
+		634189332AF5443000CA181A /* MainVC-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC-Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				634189322AF542CB00CA181A /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,17 +131,15 @@
 		634188D02AF4D86200CA181A /* Pazarama-PokeApp */ = {
 			isa = PBXGroup;
 			children = (
-				6341892A2AF5200500CA181A /* ViewModel */,
-				634189252AF51FF800CA181A /* Service */,
+				6341892F2AF53E7600CA181A /* Base */,
 				6341891E2AF51FCB00CA181A /* Constant */,
+				634189252AF51FF800CA181A /* Service */,
+				6341892A2AF5200500CA181A /* ViewModel */,
 				634189112AF5189F00CA181A /* Extensions */,
 				6341890E2AF505BA00CA181A /* Model */,
 				6341890D2AF5059900CA181A /* CustomViews */,
 				6341890C2AF5058B00CA181A /* ViewControllers */,
 				634189012AF4E45800CA181A /* Cells */,
-				634188D12AF4D86200CA181A /* AppDelegate.swift */,
-				634188DA2AF4D86400CA181A /* Assets.xcassets */,
-				634188DC2AF4D86400CA181A /* LaunchScreen.storyboard */,
 				634188DF2AF4D86400CA181A /* Info.plist */,
 			);
 			path = "Pazarama-PokeApp";
@@ -196,7 +196,6 @@
 			children = (
 				634189212AF51FED00CA181A /* Pokemon.swift */,
 				634189222AF51FED00CA181A /* PokemonDetails.swift */,
-				634189062AF4F14600CA181A /* Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -206,6 +205,7 @@
 			children = (
 				634189132AF5196300CA181A /* DetailVC-Extension.swift */,
 				634189122AF5196300CA181A /* UIImageExtension.swift */,
+				634189332AF5443000CA181A /* MainVC-Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -236,6 +236,16 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		6341892F2AF53E7600CA181A /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				634188D12AF4D86200CA181A /* AppDelegate.swift */,
+				634188DA2AF4D86400CA181A /* Assets.xcassets */,
+				634188DC2AF4D86400CA181A /* LaunchScreen.storyboard */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -252,6 +262,9 @@
 			dependencies = (
 			);
 			name = "Pazarama-PokeApp";
+			packageProductDependencies = (
+				634189312AF542CB00CA181A /* SDWebImage */,
+			);
 			productName = "Pazarama-PokeApp";
 			productReference = 634188CE2AF4D86200CA181A /* Pazarama-PokeApp.app */;
 			productType = "com.apple.product-type.application";
@@ -324,6 +337,9 @@
 				Base,
 			);
 			mainGroup = 634188C52AF4D86100CA181A;
+			packageReferences = (
+				634189302AF542CB00CA181A /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 634188CF2AF4D86200CA181A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -366,6 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				634189342AF5443000CA181A /* MainVC-Extension.swift in Sources */,
 				634189152AF5196300CA181A /* DetailVC-Extension.swift in Sources */,
 				634189172AF5197700CA181A /* TypeCell.swift in Sources */,
 				634189202AF51FCB00CA181A /* BaseUrl.swift in Sources */,
@@ -381,7 +398,6 @@
 				634188D22AF4D86200CA181A /* AppDelegate.swift in Sources */,
 				6341891A2AF5198700CA181A /* BaseStatsView.swift in Sources */,
 				634189292AF51FF800CA181A /* APIManager.swift in Sources */,
-				634189072AF4F14600CA181A /* Model.swift in Sources */,
 				6341891D2AF5199500CA181A /* DetailVC.swift in Sources */,
 				634189092AF4FB1200CA181A /* SortDropdownView.swift in Sources */,
 				634189242AF51FED00CA181A /* PokemonDetails.swift in Sources */,
@@ -721,6 +737,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		634189302AF542CB00CA181A /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.18.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		634189312AF542CB00CA181A /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 634189302AF542CB00CA181A /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 634188C62AF4D86100CA181A /* Project object */;
 }
