@@ -3,10 +3,10 @@ In this homework we focused on a Pokemon App using PokeAPI.
 
 ## Contributors
 1. [Eken Özlü](https://github.com/ekenozlu)
-2. [Emre Özbağdatlı]()
+2. [Emre Özbağdatlı](https://github.com/EmreOzbagdatli)
 3. [Gökalp Okumuş](https://github.com/hgokumus35)
-4. [Mehmet Kaan]()
-5. [Mustafa Kaan Yıldırım]()
+4. [Mehmet Kaan](https://github.com/MehmetKaan96)
+5. [Mustafa Kaan Yıldırım](https://github.com/kaannyil)
    
 We used [this](https://www.figma.com/file/DwPu6EVf5Jr4vDUVeRXXUJ/Pokédex-(Community)?node-id=1016%3A1461&mode=dev) design as source
 
