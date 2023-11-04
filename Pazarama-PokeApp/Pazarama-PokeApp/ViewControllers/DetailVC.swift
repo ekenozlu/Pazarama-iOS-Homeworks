@@ -10,15 +10,18 @@ import SDWebImage
 
 class DetailVC: UIViewController, PokemonDetailViewModelOutPut {
     
+    var selectedIndex : Int
     var selectedPokemonName : String = ""
     var primaryColor = UIColor.black
     var secondaryColor = UIColor.white
     var detailViewModel : PokemonDetailViewModel
     
-    init(detailViewModel: PokemonDetailViewModel) {
+    init(detailViewModel: PokemonDetailViewModel, index: Int) {
         self.detailViewModel = detailViewModel
+        self.selectedIndex = index
         super.init(nibName: nil, bundle: nil)
         detailViewModel.output = self
+        selectedPokemonName = shownArray[self.selectedIndex].name
     }
     
     required init?(coder: NSCoder) {
@@ -172,15 +175,30 @@ class DetailVC: UIViewController, PokemonDetailViewModelOutPut {
         view.addSubview(pokemonID)
         view.addSubview(pokeballImage)
         view.addSubview(pokemonImage)
-        view.addSubview(nextButton)
-        view.addSubview(previousButton)
         
+        if selectedIndex == 0 {
+            previousButton.isHidden = true
+            nextButton.isHidden = false
+        } else if selectedIndex == shownArray.count - 1 {
+            previousButton.isHidden = false
+            nextButton.isHidden = true
+        } else {
+            previousButton.isHidden = false
+            nextButton.isHidden = false
+        }
+        previousButton.addTarget(self, action: #selector(arrowTapped(_:)), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(arrowTapped(_:)), for: .touchUpInside)
+        view.addSubview(previousButton)
+        view.addSubview(nextButton)
         
         detailView.addSubview(typeStackView)
         
         aboutLabel.textColor = primaryColor
         detailView.addSubview(aboutLabel)
         detailView.addSubview(aboutStack)
+        aboutStack.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
+        }
         
         detailView.addSubview(aboutText)
         
@@ -188,6 +206,9 @@ class DetailVC: UIViewController, PokemonDetailViewModelOutPut {
         detailView.addSubview(baseStatsLabel)
         
         detailView.addSubview(baseStatsStack)
+        baseStatsStack.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
+        }
         
         view.backgroundColor = primaryColor
         createConstraints()
@@ -257,6 +278,9 @@ class DetailVC: UIViewController, PokemonDetailViewModelOutPut {
     }
     
     private func addTypes(typeArray : [PokemonTypes]) {
+        typeStackView.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
+        }
         for type in typeArray {
             primaryColor = UIColor(named: typeArray.first?.type.name.capitalized ?? "") ?? .black
             secondaryColor = primaryColor.withAlphaComponent(0.2)
@@ -266,7 +290,7 @@ class DetailVC: UIViewController, PokemonDetailViewModelOutPut {
             typeView.backgroundColor = UIColor(named: type.type.name.capitalized) ?? .black
             typeView.layer.cornerRadius = 10
             typeStackView.addArrangedSubview(typeView)
-            typeView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+            typeView.widthAnchor.constraint(equalToConstant: 70).isActive = true
             typeView.heightAnchor.constraint(equalToConstant: 20).isActive = true
             
             let label = UILabel()
@@ -331,6 +355,16 @@ class DetailVC: UIViewController, PokemonDetailViewModelOutPut {
         DispatchQueue.main.async {
             self.aboutText.text = flavorTextEntries.flavorTextEntries[9].flavorText?.capitalized
         }
+    }
+    
+    @objc func arrowTapped(_ sender : UIButton) {
+        if sender == previousButton {
+            selectedIndex -= 1
+        } else if sender == nextButton {
+            selectedIndex += 1
+        }
+        selectedPokemonName = shownArray[selectedIndex].name
+        detailViewModel.fetchPokemonDetail(selectedPokemonName)
     }
     
     @objc func backTapped() {

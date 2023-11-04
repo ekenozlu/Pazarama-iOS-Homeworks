@@ -12,7 +12,7 @@ class PokeCell: UICollectionViewCell {
     let pokeImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .clear
         imageView.clipsToBounds = true
         return imageView
@@ -23,7 +23,7 @@ class PokeCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.textAlignment = .center
-        label.font = UIFont(name: "Poppins-Regular", size: 10)
+        label.font = UIFont(name: "Poppins-Regular", size: 14)
         return label
     }()
     
@@ -32,7 +32,7 @@ class PokeCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .gray
         label.textAlignment = .center
-        label.font = UIFont(name: "Poppins-Regular", size: 8)
+        label.font = UIFont(name: "Poppins-Regular", size: 12)
         return label
     }()
     
@@ -65,14 +65,13 @@ class PokeCell: UICollectionViewCell {
         pokeImageView.topAnchor.constraint(equalTo: pokeIdLabel.bottomAnchor, constant: 0).isActive = true
         pokeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
         pokeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        pokeImageView.heightAnchor.constraint(equalToConstant: 72).isActive = true
-        pokeImageView.widthAnchor.constraint(equalToConstant: 72).isActive = true
+        pokeImageView.heightAnchor.constraint(equalToConstant: 64).isActive = true
         
         addSubview(pokeNameLabel)
         pokeNameLabel.topAnchor.constraint(equalTo: pokeImageView.bottomAnchor,constant: 4).isActive = true
         pokeNameLabel.leftAnchor.constraint(equalTo: leftAnchor,constant: 8).isActive = true
         pokeNameLabel.rightAnchor.constraint(equalTo: rightAnchor,constant: -8).isActive = true
-        pokeNameLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
+        pokeNameLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
         
         
         

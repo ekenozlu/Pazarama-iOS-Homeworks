@@ -31,7 +31,7 @@ extension MainVC : UICollectionViewDelegate, UICollectionViewDataSource, UITextF
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pokeCell", for: indexPath) as! PokeCell
         
-        let pokemon = self.shownArray[indexPath.row]
+        let pokemon = shownArray[indexPath.row]
         detailViewModel.fetchPokemonImage(pokemon.name, in: cell)
         cell.pokeNameLabel.text = pokemon.name.capitalized
         
@@ -40,8 +40,8 @@ extension MainVC : UICollectionViewDelegate, UICollectionViewDataSource, UITextF
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let pokemonService = APIManager()
-        let detailVC = DetailVC(detailViewModel: PokemonDetailViewModel(pokemonService: pokemonService))
-        detailVC.selectedPokemonName = shownArray[indexPath.row].name
+        let detailVC = DetailVC(detailViewModel: PokemonDetailViewModel(pokemonService: pokemonService),index: indexPath.row)
+        //detailVC.selectedPokemonName = shownArray[indexPath.row].name
         detailVC.modalPresentationStyle = .fullScreen
         self.present(detailVC, animated: true)
     }

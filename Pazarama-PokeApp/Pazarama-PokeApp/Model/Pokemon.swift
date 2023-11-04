@@ -17,3 +17,6 @@ struct PokemonResult: Codable {
     let url: String
     var imageUrl : String?
 }
+
+var baseArray : [PokemonResult] = []
+var shownArray : [PokemonResult] = []

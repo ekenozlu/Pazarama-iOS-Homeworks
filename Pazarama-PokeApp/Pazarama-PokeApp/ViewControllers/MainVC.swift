@@ -25,9 +25,7 @@ class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOu
         fatalError("init(coder:) has not been implemented")
     }
     
-    var baseArray : [PokemonResult] = []
-    var shownArray : [PokemonResult] = []
-    
+    let searchTF = UITextField()
     let sortButton = UIButton()
     let dropdownView = SortDropdownView()
     var pokeCV = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -94,7 +92,6 @@ class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOu
         searchImage.bottomAnchor.constraint(equalTo: searchView.bottomAnchor,constant: -8).isActive = true
         searchImage.widthAnchor.constraint(equalTo: searchImage.heightAnchor, multiplier: 1).isActive = true
         
-        let searchTF = UITextField()
         searchTF.translatesAutoresizingMaskIntoConstraints = false
         searchTF.attributedPlaceholder = NSAttributedString(
             string: "Search",
@@ -175,8 +172,8 @@ class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOu
     
     func getPokemon(_ pokemon: Pokemon) {
         DispatchQueue.main.async {
-            self.baseArray = pokemon.results
-            self.shownArray = self.baseArray
+            baseArray = pokemon.results
+            shownArray = baseArray
             self.pokeCV.reloadData()
         }
     }
@@ -194,8 +191,10 @@ class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOu
         dropdownView.radioButton2.buttonImage.image = .radioButtonUnchecked
         dropdownView.radioButton3.buttonImage.image = .radioButtonUnchecked
         dropdownView.radioButton4.buttonImage.image = .radioButtonUnchecked
+        shownArray = baseArray.filter({ poke in
+            poke.name.localizedCaseInsensitiveContains(searchTF.text ?? "")
+        })
         sortButton.setImage(.tag, for: .normal)
-        shownArray = baseArray
         pokeCV.reloadData()
     }
     
@@ -204,7 +203,9 @@ class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOu
         dropdownView.radioButton2.buttonImage.image = .radioButtonChecked
         dropdownView.radioButton3.buttonImage.image = .radioButtonUnchecked
         dropdownView.radioButton4.buttonImage.image = .radioButtonUnchecked
-        shownArray = baseArray.reversed()
+        shownArray = baseArray.filter({ poke in
+            poke.name.localizedCaseInsensitiveContains(searchTF.text ?? "")
+        }).reversed()
         sortButton.setImage(.tag, for: .normal)
         pokeCV.reloadData()
     }
