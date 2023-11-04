@@ -10,14 +10,12 @@ import SDWebImage
 
 class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOutPut {
     
-    var pokemonImageURL: String
-    private let viewModel: PokemonViewModel
-    private let detailViewModel: PokemonDetailViewModel
+    internal let viewModel: PokemonViewModel
+    internal let detailViewModel: PokemonDetailViewModel
     
     init(viewModel: PokemonViewModel, detailViewModel: PokemonDetailViewModel) {
         self.viewModel = viewModel
         self.detailViewModel = detailViewModel
-        pokemonImageURL = ""
         super.init(nibName: nil, bundle: nil)
         viewModel.output = self
         detailViewModel.output = self
@@ -27,9 +25,10 @@ class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOu
         fatalError("init(coder:) has not been implemented")
     }
     
-    var baseArray : [PokemonResult]!
-    var shownArray : [PokemonResult]!
+    var baseArray : [PokemonResult] = []
+    var shownArray : [PokemonResult] = []
     
+    let sortButton = UIButton()
     let dropdownView = SortDropdownView()
     var pokeCV = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
@@ -66,7 +65,7 @@ class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOu
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = "Pokédex"
         titleLabel.textColor = .white
-        titleLabel.font = .systemFont(ofSize: 24, weight: .bold)
+        titleLabel.font = UIFont(name: "Poppins-Bold", size: 24)
         titleView.addSubview(titleLabel)
         titleLabel.centerYAnchor.constraint(equalTo: pokeball.centerYAnchor).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: pokeball.rightAnchor, constant: 16).isActive = true
@@ -101,7 +100,7 @@ class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOu
             string: "Search",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
         )
-        searchTF.font = .systemFont(ofSize: 16, weight: .regular)
+        searchTF.font = UIFont(name: "Poppins-Regular", size: 16)
         searchTF.textColor = .black
         searchTF.tintColor = .mainRed
         searchTF.delegate = self
@@ -111,7 +110,6 @@ class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOu
         searchTF.centerYAnchor.constraint(equalTo: searchView.centerYAnchor).isActive = true
         searchTF.heightAnchor.constraint(equalTo: searchView.heightAnchor,multiplier: 0.8).isActive = true
         
-        let sortButton = UIButton()
         sortButton.translatesAutoresizingMaskIntoConstraints = false
         sortButton.setImage(.tag, for: .normal)
         sortButton.imageView?.contentMode = .scaleAspectFill
@@ -176,20 +174,16 @@ class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOu
     }
     
     func getPokemon(_ pokemon: Pokemon) {
-        baseArray = pokemon.results
-        shownArray = baseArray
         DispatchQueue.main.async {
+            self.baseArray = pokemon.results
+            self.shownArray = self.baseArray
             self.pokeCV.reloadData()
         }
     }
     
-    func getPokemonDetail(_ pokemon: PokemonDetails) {
-        //
-    }
+    func getPokemonDetail(_ pokemon: PokemonDetails) { return }
     
-    func getPokemonSpecies(_ flavorTextEntries: Species) {
-        //
-    }
+    func getPokemonSpecies(_ flavorTextEntries: Species) { return }
     
     @objc func sortClicked() {
         dropdownView.isHidden = !dropdownView.isHidden
@@ -200,6 +194,7 @@ class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOu
         dropdownView.radioButton2.buttonImage.image = .radioButtonUnchecked
         dropdownView.radioButton3.buttonImage.image = .radioButtonUnchecked
         dropdownView.radioButton4.buttonImage.image = .radioButtonUnchecked
+        sortButton.setImage(.tag, for: .normal)
         shownArray = baseArray
         pokeCV.reloadData()
     }
@@ -210,6 +205,7 @@ class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOu
         dropdownView.radioButton3.buttonImage.image = .radioButtonUnchecked
         dropdownView.radioButton4.buttonImage.image = .radioButtonUnchecked
         shownArray = baseArray.reversed()
+        sortButton.setImage(.tag, for: .normal)
         pokeCV.reloadData()
     }
     
@@ -221,6 +217,8 @@ class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOu
         shownArray = shownArray.sorted(by: { p1, p2 in
             p1.name < p2.name
         })
+        
+        sortButton.setImage(.textFormat, for: .normal)
         pokeCV.reloadData()
     }
     
@@ -232,6 +230,7 @@ class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOu
         shownArray = shownArray.sorted(by: { p1, p2 in
             p1.name > p2.name
         })
+        sortButton.setImage(.textFormat, for: .normal)
         pokeCV.reloadData()
     }
     

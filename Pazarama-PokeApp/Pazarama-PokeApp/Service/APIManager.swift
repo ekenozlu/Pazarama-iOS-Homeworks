@@ -13,27 +13,10 @@ protocol PokemonService {
     func fetchPokemonSpecies(url: String, completion: @escaping (Result<Species, NetworkError>) -> ())
 }
 
-
-enum NetworkError: Error {
-  case requestFailed
-  case invalidData
-  case decodeError
-  var localizedDescription: String {
-    switch self {
-    case .requestFailed:
-      return "Request Failed"
-    case .invalidData:
-      return "Invalid Data"
-    case .decodeError:
-      return "Decoding Error"
-    }
-  }
-}
-
 class APIManager: PokemonService {
     
     func fetchPokemon(completion: @escaping (Result<Pokemon, NetworkError>) -> ()) {
-    
+        
         if let url = URL(string: BaseUrl.baseUrl + "pokemon") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {
@@ -42,8 +25,8 @@ class APIManager: PokemonService {
                     return
                 }
                 guard let data = data else {
-                  completion(.failure(.invalidData))
-                  return
+                    completion(.failure(.invalidData))
+                    return
                 }
                 
                 do {
@@ -58,7 +41,7 @@ class APIManager: PokemonService {
     }
     
     func fetchPokemonDetail(name: String, completion: @escaping (Result<PokemonDetails, NetworkError>) -> ()) {
-    
+        
         if let url = URL(string: BaseUrl.baseUrl + "pokemon/\(name)") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {
@@ -67,8 +50,8 @@ class APIManager: PokemonService {
                     return
                 }
                 guard let data = data else {
-                  completion(.failure(.invalidData))
-                  return
+                    completion(.failure(.invalidData))
+                    return
                 }
                 
                 do {
@@ -83,7 +66,6 @@ class APIManager: PokemonService {
     }
     
     func fetchPokemonSpecies(url: String, completion: @escaping (Result<Species, NetworkError>) -> ()) {
-    
         if let url = URL(string: url) {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {
@@ -92,8 +74,8 @@ class APIManager: PokemonService {
                     return
                 }
                 guard let data = data else {
-                  completion(.failure(.invalidData))
-                  return
+                    completion(.failure(.invalidData))
+                    return
                 }
                 
                 do {

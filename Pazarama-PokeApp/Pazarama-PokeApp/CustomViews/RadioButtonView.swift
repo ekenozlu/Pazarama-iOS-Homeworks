@@ -37,7 +37,7 @@ class RadioButtonView : UIView {
         buttonImage.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         buttonLabel.translatesAutoresizingMaskIntoConstraints = false
-        buttonLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        buttonLabel.font = UIFont(name: "Poppins-Regular", size: 14)
         buttonLabel.textColor = .black
         buttonLabel.textAlignment = .right
         addSubview(buttonLabel)

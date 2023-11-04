@@ -46,17 +46,17 @@ class AboutView: UIView {
         imageView.contentMode = .scaleAspectFit
         
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
-        infoLabel.font = .systemFont(ofSize: 16, weight: .regular)
+        infoLabel.font = UIFont(name: "Poppins-Regular", size: 16)
         infoLabel.textColor = .black
         
         
         infoLabel2.translatesAutoresizingMaskIntoConstraints = false
-        infoLabel2.font = .systemFont(ofSize: 16, weight: .regular)
+        infoLabel2.font = UIFont(name: "Poppins-Regular", size: 16)
         infoLabel2.textColor = .black
         infoLabel2.textAlignment = .center
         
         infoLabel3.translatesAutoresizingMaskIntoConstraints = false
-        infoLabel3.font = .systemFont(ofSize: 14, weight: .regular)
+        infoLabel3.font = UIFont(name: "Poppins-Regular", size: 16)
         infoLabel3.textColor = .gray
         infoLabel3.textAlignment = .center
         addSubview(infoLabel3)
@@ -93,8 +93,4 @@ class AboutView: UIView {
         widthAnchor.constraint(equalToConstant: 100).isActive = true
         heightAnchor.constraint(equalToConstant: 85).isActive = true
     }
-}
-#Preview() {
-    //AboutView(isWithImage: true, image: UIImage(named: "weight")!, info1: "6.5 kg", info2: nil, info3: "Weight")
-    AboutView(isWithImage: false, image: nil, info1: "6.5 kg", info2: "nil", info3: "Weight")
 }

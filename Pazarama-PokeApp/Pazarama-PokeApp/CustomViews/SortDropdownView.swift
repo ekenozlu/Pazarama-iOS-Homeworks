@@ -40,7 +40,7 @@ class SortDropdownView : UIView {
         label.text = "Sort by:"
         label.textColor = .white
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 16, weight: .black)
+        label.font = UIFont(name: "Poppins-Black", size: 16)
         addSubview(label)
         label.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
         label.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
@@ -63,15 +63,11 @@ class SortDropdownView : UIView {
         innerView.addArrangedSubview(radioButton1)
         radioButton1.leftAnchor.constraint(equalTo: innerView.leftAnchor).isActive = true
         radioButton1.rightAnchor.constraint(equalTo: innerView.rightAnchor).isActive = true
-        //radioButton1.topAnchor.constraint(equalTo: innerView.topAnchor).isActive = true
-        //radioButton1.bottomAnchor.constraint(equalTo: innerView.centerYAnchor).isActive = true
         
         radioButton2.translatesAutoresizingMaskIntoConstraints = false
         innerView.addArrangedSubview(radioButton2)
         radioButton2.leftAnchor.constraint(equalTo: innerView.leftAnchor).isActive = true
         radioButton2.rightAnchor.constraint(equalTo: innerView.rightAnchor).isActive = true
-        //radioButton2.bottomAnchor.constraint(equalTo: innerView.bottomAnchor).isActive = true
-        //radioButton2.topAnchor.constraint(equalTo: innerView.centerYAnchor).isActive = true
         
         radioButton3.translatesAutoresizingMaskIntoConstraints = false
         innerView.addArrangedSubview(radioButton3)

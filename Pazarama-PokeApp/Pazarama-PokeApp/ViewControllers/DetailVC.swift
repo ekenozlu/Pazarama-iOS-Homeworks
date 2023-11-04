@@ -6,15 +6,28 @@
 //
 
 import UIKit
+import SDWebImage
 
-class DetailVC: UIViewController {
+class DetailVC: UIViewController, PokemonDetailViewModelOutPut {
     
-    var primaryColor = UIColor()
-    var secondaryColor = UIColor()
+    var selectedPokemonName : String = ""
+    var primaryColor = UIColor.black
+    var secondaryColor = UIColor.white
+    var detailViewModel : PokemonDetailViewModel
+    
+    init(detailViewModel: PokemonDetailViewModel) {
+        self.detailViewModel = detailViewModel
+        super.init(nibName: nil, bundle: nil)
+        detailViewModel.output = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     private let backButton: UIButton = {
         let button = UIButton()
-        button.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
         button.setImage(UIImage(named: "arrow_back"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -23,7 +36,7 @@ class DetailVC: UIViewController {
     private let pokemonName: UILabel = {
         let name = UILabel()
         name.text = "Pokemon Name"
-        name.font = .systemFont(ofSize: 24, weight: .bold)
+        name.font = UIFont(name: "Poppins-Bold", size: 24)
         name.numberOfLines = 1
         name.textColor = .white
         name.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +46,7 @@ class DetailVC: UIViewController {
     private let pokemonID: UILabel = {
         let name = UILabel()
         name.text = "#001"
-        name.font = .systemFont(ofSize: 18, weight: .regular)
+        name.font = UIFont(name: "Poppins-Regular", size: 18)
         name.numberOfLines = 1
         name.textColor = .white
         name.translatesAutoresizingMaskIntoConstraints = false
@@ -51,8 +64,7 @@ class DetailVC: UIViewController {
     
     private let pokemonImage: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
-        iv.image = .bulbasaur
+        iv.contentMode = .scaleAspectFit
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
@@ -92,7 +104,7 @@ class DetailVC: UIViewController {
     private let aboutLabel: UILabel = {
         let label = UILabel()
         label.text = "About"
-        label.font = .systemFont(ofSize: 18, weight: .black)
+        label.font = UIFont(name: "Poppins-Black", size: 18)
         label.numberOfLines = 1
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -112,8 +124,8 @@ class DetailVC: UIViewController {
     
     private let aboutText: UILabel = {
         let label = UILabel()
-        label.text = "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.text = ""
+        label.font = UIFont(name: "Poppins-Regular", size: 16)
         label.textAlignment = .center
         label.numberOfLines = 6
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -123,7 +135,7 @@ class DetailVC: UIViewController {
     private let baseStatsLabel: UILabel = {
         let label = UILabel()
         label.text = "Base Stats"
-        label.font = .systemFont(ofSize: 18, weight: .black)
+        label.font = UIFont(name: "Poppins-Black", size: 18)
         label.numberOfLines = 1
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -139,16 +151,23 @@ class DetailVC: UIViewController {
         return stack
     }()
     
+    var weightView : AboutView!
+    var heightView : AboutView!
+    var movesView : AboutView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        createUI()
+        detailViewModel.fetchPokemonDetail(selectedPokemonName)
     }
     
     private func createUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = primaryColor
         
         view.addSubview(detailView)
+        
+        backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
         view.addSubview(backButton)
+        
         view.addSubview(pokemonName)
         view.addSubview(pokemonID)
         view.addSubview(pokeballImage)
@@ -157,47 +176,17 @@ class DetailVC: UIViewController {
         view.addSubview(previousButton)
         
         
-        primaryColor = (pokemonImage.image?.primaryColor)!
-        secondaryColor = (pokemonImage.image?.secondaryColor)!
-        
-        addTypes()
         detailView.addSubview(typeStackView)
         
         aboutLabel.textColor = primaryColor
         detailView.addSubview(aboutLabel)
-        let weightView = AboutView(isWithImage: true, image: UIImage(named: "weight"),
-                                   info1: "6.5 kg", info2: nil, info3: "weight")
-        let heightView = AboutView(isWithImage: true, image: UIImage(named: "straighten"),
-                                   info1: "0.7 m", info2: nil, info3: "Height")
-        let movesView = AboutView(isWithImage: false, image: nil,
-                                  info1: "Move1", info2: "Move2", info3: "Moves")
-        aboutStack.addArrangedSubview(weightView)
-        aboutStack.addArrangedSubview(heightView)
-        aboutStack.addArrangedSubview(movesView)
         detailView.addSubview(aboutStack)
         
         detailView.addSubview(aboutText)
         
         baseStatsLabel.textColor = primaryColor
         detailView.addSubview(baseStatsLabel)
-        let stat1 = BaseStatsView(frame: .zero, label1Text: "HP", label2Text: "45", progress: 45 / 225,
-                                  primColor: primaryColor, secColor: secondaryColor)
-        let stat2 = BaseStatsView(frame: .zero, label1Text: "ATK", label2Text: "49", progress: 49 / 225,
-                                  primColor: primaryColor, secColor: secondaryColor)
-        let stat3 = BaseStatsView(frame: .zero, label1Text: "DEF", label2Text: "49", progress: 49 / 225,
-                                  primColor: primaryColor, secColor: secondaryColor)
-        let stat4 = BaseStatsView(frame: .zero, label1Text: "SATK", label2Text: "65", progress: 65 / 225,
-                                  primColor: primaryColor, secColor: secondaryColor)
-        let stat5 = BaseStatsView(frame: .zero, label1Text: "SDEF", label2Text: "65", progress: 65 / 225,
-                                  primColor: primaryColor, secColor: secondaryColor)
-        let stat6 = BaseStatsView(frame: .zero, label1Text: "SPD", label2Text: "45", progress: 45 / 225,
-                                  primColor: primaryColor, secColor: secondaryColor)
-        baseStatsStack.addArrangedSubview(stat1)
-        baseStatsStack.addArrangedSubview(stat2)
-        baseStatsStack.addArrangedSubview(stat3)
-        baseStatsStack.addArrangedSubview(stat4)
-        baseStatsStack.addArrangedSubview(stat5)
-        baseStatsStack.addArrangedSubview(stat6)
+        
         detailView.addSubview(baseStatsStack)
         
         view.backgroundColor = primaryColor
@@ -267,11 +256,14 @@ class DetailVC: UIViewController {
         ])
     }
     
-    private func addTypes() {
-        for _ in 0...1 {
+    private func addTypes(typeArray : [PokemonTypes]) {
+        for type in typeArray {
+            primaryColor = UIColor(named: typeArray.first?.type.name.capitalized ?? "") ?? .black
+            secondaryColor = primaryColor.withAlphaComponent(0.2)
+            
             let typeView = UIView()
             typeView.translatesAutoresizingMaskIntoConstraints = false
-            typeView.backgroundColor = secondaryColor
+            typeView.backgroundColor = UIColor(named: type.type.name.capitalized) ?? .black
             typeView.layer.cornerRadius = 10
             typeStackView.addArrangedSubview(typeView)
             typeView.widthAnchor.constraint(equalToConstant: 60).isActive = true
@@ -279,9 +271,9 @@ class DetailVC: UIViewController {
             
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
-            label.text = "Type"
+            label.text = type.type.name.capitalized
             label.textColor = .white
-            label.font = .systemFont(ofSize: 15, weight: .bold)
+            label.font = UIFont(name: "Poppins-Bold", size: 15)
             label.textAlignment = .center
             label.numberOfLines = 1
             typeView.addSubview(label)
@@ -291,13 +283,57 @@ class DetailVC: UIViewController {
             label.bottomAnchor.constraint(equalTo: typeView.bottomAnchor, constant: -2).isActive = true
         }
         
+        createUI()
+    }
+    
+    func getPokemonDetail(_ pokemon: PokemonDetails) {
+        detailViewModel.fetchPokemonSpecies(url: pokemon.species.url)
+        
+        DispatchQueue.main.async {
+            
+            self.pokemonName.text = pokemon.name.capitalized
+            self.pokemonID.text = "#\(String(format: "%03d", pokemon.id))"
+            self.pokemonImage.sd_setImage(with: URL(string: pokemon.sprites.other.officialArtwork.frontDefault))
+            self.addTypes(typeArray: pokemon.types)
+            
+            let weightView = AboutView(isWithImage: true, image: UIImage(named: "weight"),
+                                       info1: "\(Float(pokemon.weight) / 10) kg", info2: nil, info3: "Weight")
+            let heightView = AboutView(isWithImage: true, image: UIImage(named: "straighten"),
+                                       info1: "\(Float(pokemon.height) / 10) m", info2: nil, info3: "Height")
+            let movesView = AboutView(isWithImage: false, image: nil,
+                                      info1: pokemon.abilities.first?.ability.name.capitalized ?? "" , info2: pokemon.abilities.last?.ability.name.capitalized ?? "", info3: "Moves")
+            self.aboutStack.addArrangedSubview(weightView)
+            self.aboutStack.addArrangedSubview(heightView)
+            self.aboutStack.addArrangedSubview(movesView)
+            
+            let stat1 = BaseStatsView(frame: .zero, label1Text: "HP", label2Text: "\(pokemon.stats[0].baseStat)", progress: Float(pokemon.stats[0].baseStat) / 225,
+                                      primColor: self.primaryColor, secColor: self.secondaryColor)
+            let stat2 = BaseStatsView(frame: .zero, label1Text: "ATK", label2Text: "\(pokemon.stats[1].baseStat)", progress: Float(pokemon.stats[1].baseStat) / 225,
+                                      primColor: self.primaryColor, secColor: self.secondaryColor)
+            let stat3 = BaseStatsView(frame: .zero, label1Text: "DEF", label2Text: "\(pokemon.stats[2].baseStat)", progress: Float(pokemon.stats[2].baseStat) / 225,
+                                      primColor: self.primaryColor, secColor: self.secondaryColor)
+            let stat4 = BaseStatsView(frame: .zero, label1Text: "SATK", label2Text: "\(pokemon.stats[3].baseStat)", progress: Float(pokemon.stats[3].baseStat) / 225,
+                                      primColor: self.primaryColor, secColor: self.secondaryColor)
+            let stat5 = BaseStatsView(frame: .zero, label1Text: "SDEF", label2Text: "\(pokemon.stats[4].baseStat)", progress: Float(pokemon.stats[4].baseStat) / 225,
+                                      primColor: self.primaryColor, secColor: self.secondaryColor)
+            let stat6 = BaseStatsView(frame: .zero, label1Text: "SPD", label2Text: "\(pokemon.stats[5].baseStat)", progress: Float(pokemon.stats[5].baseStat) / 225,
+                                      primColor: self.primaryColor, secColor: self.secondaryColor)
+            self.baseStatsStack.addArrangedSubview(stat1)
+            self.baseStatsStack.addArrangedSubview(stat2)
+            self.baseStatsStack.addArrangedSubview(stat3)
+            self.baseStatsStack.addArrangedSubview(stat4)
+            self.baseStatsStack.addArrangedSubview(stat5)
+            self.baseStatsStack.addArrangedSubview(stat6)
+        }
+    }
+    
+    func getPokemonSpecies(_ flavorTextEntries: Species) {
+        DispatchQueue.main.async {
+            self.aboutText.text = flavorTextEntries.flavorTextEntries[9].flavorText?.capitalized
+        }
     }
     
     @objc func backTapped() {
         self.dismiss(animated: true)
     }
-}
-
-#Preview{
-    DetailVC()
 }

@@ -23,7 +23,7 @@ class PokeCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.font = UIFont(name: "Poppins-Regular", size: 16)
         return label
     }()
     

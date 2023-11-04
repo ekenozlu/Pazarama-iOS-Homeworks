@@ -14,7 +14,7 @@ class BaseStatsView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Label 1"
         label.textAlignment = .right
-        label.font = .systemFont(ofSize: 16, weight: .black)
+        label.font = UIFont(name: "Poppins-Black", size: 16)
         label.textColor = .black
         label.numberOfLines = 1
         return label
@@ -33,8 +33,8 @@ class BaseStatsView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Label 2"
-        label.textAlignment = .left
-        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.textAlignment = .right
+        label.font = UIFont(name: "Poppins-Regular", size: 16)
         label.textColor = .darkGray
         label.numberOfLines = 1
         return label
@@ -81,6 +81,7 @@ class BaseStatsView: UIView {
 
             statValue.leadingAnchor.constraint(equalTo: divider.trailingAnchor, constant: 8),
             statValue.centerYAnchor.constraint(equalTo: centerYAnchor),
+            statValue.widthAnchor.constraint(equalToConstant: 30),
 
             progressBar.leadingAnchor.constraint(equalTo: statValue.trailingAnchor, constant: 8),
             progressBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
@@ -90,6 +91,6 @@ class BaseStatsView: UIView {
 }
 
 #Preview() {
-    BaseStatsView(frame: .zero, label1Text: "SDEF", label2Text: "45", progress: 45 / 100,primColor: .red,secColor: .green)
+    BaseStatsView(frame: .zero, label1Text: "SDEF", label2Text: "145", progress: 145 / 225,primColor: .red,secColor: .green)
 }
 
