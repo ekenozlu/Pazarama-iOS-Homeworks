@@ -31,8 +31,10 @@ final class PokemonDetailViewModel {
                 switch result {
                 case .success(let fetchedPokemon):
                     cell.pokeImageView.sd_setImage(with: URL(string: fetchedPokemon.sprites.other.officialArtwork.frontDefault))
+                    cell.pokeIdLabel.text = String(format: "#%03d", fetchedPokemon.id)
                 case .failure:
                     cell.pokeImageView.image = .pokeball
+                    cell.pokeIdLabel.text = String(format: "#%03d", 0)
                 }
             }
         }
