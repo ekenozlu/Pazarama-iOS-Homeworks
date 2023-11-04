@@ -2,9 +2,9 @@
 In this homework we focused on a Pokemon App using PokeAPI.
 
 ## Contributors
-1. [Eken Özlü]()
+1. [Eken Özlü](https://github.com/ekenozlu)
 2. [Emre Özbağdatlı]()
-3. [Gökalp Okumuş]()
+3. [Gökalp Okumuş](https://github.com/hgokumus35)
 4. [Mehmet Kaan]()
 5. [Mustafa Kaan Yıldırım]()
    
