@@ -38,14 +38,12 @@ extension MainVC : UICollectionViewDelegate, UICollectionViewDataSource, UITextF
         let pokemon = shownArray[indexPath.row]
         detailViewModel.fetchPokemonImage(pokemon.name, in: cell)
         cell.pokeNameLabel.text = pokemon.name.capitalized
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let pokemonService = APIManager()
         let detailVC = DetailVC(detailViewModel: PokemonDetailViewModel(pokemonService: pokemonService),index: indexPath.row)
-        //detailVC.selectedPokemonName = shownArray[indexPath.row].name
         detailVC.modalPresentationStyle = .fullScreen
         self.present(detailVC, animated: true)
     }
