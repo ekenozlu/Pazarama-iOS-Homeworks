@@ -191,9 +191,13 @@ class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOu
         dropdownView.radioButton2.buttonImage.image = .radioButtonUnchecked
         dropdownView.radioButton3.buttonImage.image = .radioButtonUnchecked
         dropdownView.radioButton4.buttonImage.image = .radioButtonUnchecked
-        shownArray = baseArray.filter({ poke in
-            poke.name.localizedCaseInsensitiveContains(searchTF.text ?? "")
-        })
+        if let text = searchTF.text, !text.isEmpty {
+            shownArray = baseArray.filter({ poke in
+                poke.name.localizedCaseInsensitiveContains(text)
+            })
+        } else {
+            shownArray = baseArray
+        }
         sortButton.setImage(.tag, for: .normal)
         pokeCV.reloadData()
     }
@@ -203,9 +207,13 @@ class MainVC: UIViewController, PokemonViewModelOutPut, PokemonDetailViewModelOu
         dropdownView.radioButton2.buttonImage.image = .radioButtonChecked
         dropdownView.radioButton3.buttonImage.image = .radioButtonUnchecked
         dropdownView.radioButton4.buttonImage.image = .radioButtonUnchecked
-        shownArray = baseArray.filter({ poke in
-            poke.name.localizedCaseInsensitiveContains(searchTF.text ?? "")
-        }).reversed()
+        if let text = searchTF.text, !text.isEmpty {
+            shownArray = baseArray.filter({ poke in
+                poke.name.localizedCaseInsensitiveContains(text)
+            }).reversed()
+        } else {
+            shownArray = baseArray.reversed()
+        }
         sortButton.setImage(.tag, for: .normal)
         pokeCV.reloadData()
     }

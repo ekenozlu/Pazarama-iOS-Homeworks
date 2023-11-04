@@ -14,6 +14,10 @@ extension MainVC : UICollectionViewDelegate, UICollectionViewDataSource, UITextF
         
         if searchText == "" {
             shownArray = baseArray
+            dropdownView.radioButton1.buttonImage.image = .radioButtonUnchecked
+            dropdownView.radioButton2.buttonImage.image = .radioButtonUnchecked
+            dropdownView.radioButton3.buttonImage.image = .radioButtonUnchecked
+            dropdownView.radioButton4.buttonImage.image = .radioButtonUnchecked
         } else {
             shownArray = baseArray.filter({ poke in
                 poke.name.localizedCaseInsensitiveContains(searchText)
