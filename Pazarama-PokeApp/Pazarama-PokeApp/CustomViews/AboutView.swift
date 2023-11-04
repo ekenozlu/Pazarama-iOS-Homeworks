@@ -76,6 +76,8 @@ class AboutView: UIView {
             infoLabel3.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         } else {
             stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 2).isActive = true
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -2).isActive = true
             
             stackView.addArrangedSubview(infoLabel)
             infoLabel.textAlignment = .center
