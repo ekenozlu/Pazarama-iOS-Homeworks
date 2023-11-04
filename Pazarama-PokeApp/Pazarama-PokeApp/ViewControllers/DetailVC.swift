@@ -74,14 +74,14 @@ class DetailVC: UIViewController, PokemonDetailViewModelOutPut {
     
     private let nextButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "chevron_right"), for: .normal)
+        button.setImage(.chevronRight, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private let previousButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "chevron_left"), for: .normal)
+        button.setImage(.chevronLeft, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -237,10 +237,14 @@ class DetailVC: UIViewController, PokemonDetailViewModelOutPut {
             pokemonImage.heightAnchor.constraint(equalToConstant: 200),
             
             previousButton.centerYAnchor.constraint(equalTo: pokemonImage.centerYAnchor),
-            previousButton.trailingAnchor.constraint(equalTo: pokemonImage.leadingAnchor, constant: -32),
+            previousButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            previousButton.heightAnchor.constraint(equalToConstant: 40),
+            previousButton.widthAnchor.constraint(equalToConstant: 40),
             
             nextButton.centerYAnchor.constraint(equalTo: pokemonImage.centerYAnchor),
-            nextButton.leadingAnchor.constraint(equalTo: pokemonImage.trailingAnchor, constant: 32),
+            nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            nextButton.heightAnchor.constraint(equalToConstant: 40),
+            nextButton.widthAnchor.constraint(equalToConstant: 40),
             
             detailView.topAnchor.constraint(equalTo: pokemonName.bottomAnchor, constant: 180),
             detailView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
