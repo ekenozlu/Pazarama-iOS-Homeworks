@@ -1,5 +1,5 @@
 ### Pazarama-iOS-Bootcamp Homework1
-In this homework we focused on a mock food delivery application feed screen. It aims to built on static data and non-functional.
+In this homework I focused on a mock food delivery application feed screen. It aims to built on static data and non-functional.
 
 I used [this](https://www.behance.net/gallery/108639283/Meal-Monkey-Food-delivery-iOS-mobile-application) design as source
 ## App Contains
